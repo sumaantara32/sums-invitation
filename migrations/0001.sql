@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS invitations (
+ slug TEXT PRIMARY KEY,
+ payload TEXT NOT NULL,
+ updated_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE IF NOT EXISTS rsvps (
+ id TEXT PRIMARY KEY,
+ slug TEXT NOT NULL REFERENCES invitations(slug) ON DELETE CASCADE,
+ name TEXT NOT NULL,
+ attendance TEXT NOT NULL CHECK(attendance IN ('yes','no','maybe')),
+ guests INTEGER NOT NULL CHECK(guests BETWEEN 1 AND 10),
+ message TEXT NOT NULL DEFAULT '',
+ created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+CREATE INDEX IF NOT EXISTS rsvps_slug ON rsvps(slug, created_at);

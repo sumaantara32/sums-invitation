@@ -1,0 +1,1 @@
+{"name":"sums-invitation","private":true,"type":"module","scripts":{"check":"node --check dist/app.js && node --check functions/api/invitations/[[slug]].js && node --check functions/api/rsvp/[[slug]].js && node scripts/check.mjs","build":"node scripts/build.mjs"}}
